@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/08 17:51:48 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/08 18:52:53 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "mlx_keycodes.h"
 
 # define WINDOW_WIDTH			1920
 # define WINDOW_HEIGHT			1080

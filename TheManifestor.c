@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:59 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/08 17:50:03 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/08 18:52:37 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,6 @@ void	put_pixel_to_image(t_ctx *ctx, t_point point)
 	{
 		*(unsigned int *)(ctx->mlx.addr + point.y * ctx->mlx.ll + point.x * (ctx->mlx.bpp / 8)) = point.color;
 	}
-}
-
-int	ft_abs(int n)
-{
-	if (n < 0)
-		return (-n);
-	else
-		return (n);
-}
-
-int	ft_max(int m, int n)
-{
-	if (m > n)
-		return (m);
-	else
-		return (n);
-}
-
-int	iroundf(float x)
-{
-	if (x >= 0.0f)
-		return ((int)(x + 0.5f));
-	else
-		return ((int)(x - 0.5f));
 }
 
 void	draw_line_dda(t_ctx *ctx, t_point p1, t_point p2)
@@ -96,7 +72,7 @@ void	draw_grid(t_ctx *ctx)
 
 int	ctl_keypress(int keycode, void *param)
 {
-
+	
 }
 
 void	TheManifestor(t_ctx *ctx)
