@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/07 20:16:10 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/08 17:51:48 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ void	TheExaminer(t_ctx *ctx);
 void	TheArchitect(t_ctx *ctx);
 void	TheManifestor(t_ctx *ctx);
 void	TheAnnihilator(char *message, t_ctx *ctx);
+
+int		ft_abs(int n);
+int		ft_max(int m, int n);
+int		iroundf(float x);
 
 #endif
 
