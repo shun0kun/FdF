@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/08 18:52:53 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/10 17:22:59 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,25 @@
 # define IMAGE_HEIGHT			1080
 # define GRID_WIDTH				30
 # define GRID_HEIGHT			40
-# define GRID_ELEVATION			30
+# define GRID_ELEVATION			3
 # define GRID_DENSITY_INVERSE	2
+
+typedef struct s_dda
+{
+	int		steps;
+	float	x;
+	float	y;
+	float	a;
+	float	b;
+	float	g;
+	float	r;
+	float	x_inc;
+	float	y_inc;
+	float	a_inc;
+	float	b_inc;
+	float	g_inc;
+	float	r_inc;
+}	t_dda;
 
 typedef struct s_point
 {
@@ -37,13 +54,6 @@ typedef struct s_point
 	int				z;
 	unsigned int	color;
 }	t_point;
-
-typedef struct s_param
-{
-	int	x0;
-	int	y0;
-
-}	t_param;
 
 typedef struct s_mlx
 {
@@ -62,8 +72,10 @@ typedef struct s_ctx
 	int		fd;
 	int		width;
 	int		height;
+	float	affine_matrix[4][4];
 	t_point	**points;
-	t_param	param;
+	t_point	base_point;
+	t_point	start_point;
 	t_mlx	mlx;
 }	t_ctx;
 

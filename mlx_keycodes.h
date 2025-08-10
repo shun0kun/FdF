@@ -49,7 +49,7 @@
 #  define KEY_ESC			65307
 #  define KEY_SHIFT_L		65505
 #  define KEY_SHIFT_R		65506
-# elif _defined(_APPLE__) && defined(__MACH__)
+# elif _defined(__APPLE__) && defined(__MACH__)
 #  define KEY_ 1
 # endif
 

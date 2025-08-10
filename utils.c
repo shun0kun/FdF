@@ -15,11 +15,3 @@ int	ft_max(int m, int n)
 	else
 		return (n);
 }
-
-int	iroundf(float x)
-{
-	if (x >= 0.0f)
-		return ((int)(x + 0.5f));
-	else
-		return ((int)(x - 0.5f));
-}

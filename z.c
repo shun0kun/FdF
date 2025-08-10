@@ -37,7 +37,8 @@ int	ctl_keypress(int keycode, void *param)
 	t_mlx	mlx;
 
 	mlx = *(t_mlx *)param;
-	printf("%d\n", keycode);
+	// printf("%d\n", keycode);
+	printf("d");
 	return (0);
 }
 
@@ -50,6 +51,7 @@ int	main(void)
 	mlx_hook(mlx.win, 2, 1L<<0, ctl_keypress, &mlx);
 	mlx.img = mlx_new_image(mlx.mlx, 1920, 1080);
 	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.ll, &mlx.endian);
+	printf("%d", mlx.endian);
 	// render(mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	mlx_loop(mlx.mlx);
