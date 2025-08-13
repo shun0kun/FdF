@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/10 17:22:59 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/13 19:00:29 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "mlx_keycodes.h"
+# include "config.h"
 
 # define WINDOW_WIDTH			1920
 # define WINDOW_HEIGHT			1080
@@ -29,6 +30,8 @@
 # define GRID_HEIGHT			40
 # define GRID_ELEVATION			3
 # define GRID_DENSITY_INVERSE	2
+
+typedef float	t_mat4[4][4];
 
 typedef struct s_dda
 {
@@ -66,13 +69,30 @@ typedef struct s_mlx
 	int		endian;
 }	t_mlx;
 
+typedef struct s_mats
+{
+	t_mat4	left;
+	t_mat4	up;
+	t_mat4	right;
+	t_mat4	down;
+	t_mat4	rotpx;
+	t_mat4	rotmx;
+	t_mat4	rotpy;
+	t_mat4	rotmy;
+	t_mat4	rotpz;
+	t_mat4	rotmz;
+	t_mat4	big;
+	t_mat4	small;	
+}	t_mats;
+
 typedef struct s_ctx
 {
 	char	*filename;
 	int		fd;
 	int		width;
 	int		height;
-	float	affine_matrix[4][4];
+	t_mat4	affine_matrix;
+	t_mats	mats;
 	t_point	**points;
 	t_point	base_point;
 	t_point	start_point;

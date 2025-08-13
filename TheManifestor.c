@@ -6,21 +6,11 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:59 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/10 17:22:51 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/13 19:00:34 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	put_pixel_to_image(t_ctx *ctx, t_point point)
-{
-	if (point.x >= 0 && point.x < IMAGE_WIDTH && point.y >= 0
-		&& point.y < IMAGE_HEIGHT)
-	{
-		*(unsigned int *)(ctx->mlx.addr + point.y * ctx->mlx.ll + point.x
-				* (ctx->mlx.bpp / 8)) = point.color;
-	}
-}
 
 void	initiate_dda_param(t_dda *dda, t_point p1, t_point p2)
 {
@@ -104,9 +94,86 @@ void	draw_grid(t_ctx *ctx)
 	}
 }
 
+//-----------------------------------------------------------------------------------------------//
+
+t_point	multiply_matrix(t_ctx *ctx, float x[4][1])
+{
+	int		i;
+	int		j;
+	float	res[4][1];
+	t_point	new_p;
+
+	res[0][0] = 0;
+	res[1][0] = 0;
+	res[2][0] = 0;
+	res[3][0] = 0;
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			res[i][0] += ctx->affine_matrix[i][j] * x[j][0];
+			j++;
+		}
+		i++;
+	}
+	new_p.x = (int)res[0][0];
+	new_p.y = (int)res[1][0];
+	new_p.z = (int)res[2][0];
+	return (new_p);
+}
+
+void	edit_a_point(t_ctx *ctx, int i, int j)
+{
+	t_point	new_p;
+	float	x[4][1];
+
+	x[0][0] = ctx->points[i][j].x;
+	x[1][0] = ctx->points[i][j].y;
+	x[2][0] = ctx->points[i][j].z;
+	x[3][0] = 1;
+	new_p = multiply_matrix(ctx, x);
+	ctx->points[i][j].x = new_p.x;
+	ctx->points[i][j].y = new_p.y;
+	ctx->points[i][j].z = new_p.z;
+}
+
 void	edit_points(t_ctx *ctx, int keycode)
 {
+	int	i;
+	int	j;
 
+	i = 0;
+	while (i < ctx->height)
+	{
+		j = 0;
+		while (j < ctx->width)
+		{
+			edit_a_point(ctx, i, j);
+			j++;
+		}
+		i++;
+	}
+}
+
+//-----------------------------------------------------------------------------------------------//
+
+void	clean_image(t_ctx *ctx)
+{
+	t_point	p;
+
+	p.y = 0;
+	while (p.y < IMAGE_HEIGHT)
+	{
+		p.x = 0;
+		while (p.x < IMAGE_WIDTH)
+		{
+			put_pixel_to_image(ctx, p);
+			p.x++;
+		}
+		p.y++;
+	}
 }
 
 int	ctl_keypress(int keycode, void *param)
@@ -114,15 +181,15 @@ int	ctl_keypress(int keycode, void *param)
 	t_ctx	*ctx;
 
 	ctx = (t_ctx *)param;
-	if (keycode == KEY_ENTER)
+	if (keycode == KEY_ESC)
 	{
-		edit_points(ctx, );
-		draw_grid(ctx);
-		mlx_put_image_to_window(ctx->mlx.mlx, ctx->mlx.win, ctx->mlx.img, 0, 0);
+		TheAnnihilator(NULL, ctx);
 	}
-	if (keycode == KEY_ARROW_UP)
+	else
 	{
+		//
 		edit_points(ctx, keycode);
+		clean_image(ctx);
 		draw_grid(ctx);
 		mlx_put_image_to_window(ctx->mlx.mlx, ctx->mlx.win, ctx->mlx.img, 0, 0);
 	}
