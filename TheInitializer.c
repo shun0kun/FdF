@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:56 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/13 19:00:34 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/14 16:05:28 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,28 @@
 
 void	initialize_isometric_projection_matrix(t_mat4 matrix)
 {
-	const t_mat4	a = {{,,,},{,,,},{,,,},{,,,}};
-	memcpy(matrix, a, sizeof(a));
+	const t_mat4	to_origin_matrix = {{1, 0, 0, -IMAGE_WIDTH / 2},
+	{0, 1, 0, -IMAGE_HEIGHT / 2},
+	{0, 0, 1, 0},
+	{0, 0, 0, 1},
+	};
+	const t_mat4	rotate_z_matrix = {{cos(M_PI * 45 / 180), -sin(M_PI * 45 / 180), 0, 0},
+	{sin(M_PI * 45 / 180), cos(M_PI * 45 / 180), 0, 0},
+	{0, 0, 1, 0},
+	{0, 0, 0, 1}};
+	const t_mat4	rotate_x_matrix = {{1, 0, 0, 0},
+	{0, cos(atan(sqrt(2))), -sin(atan(sqrt(2))), 0},
+	{0, sin(atan(sqrt(2))), cos(atan(sqrt(2))), 0},
+	{0, 0, 0, 1}};
+	const t_mat4	off_origin_matrix = {{1, 0, 0, IMAGE_WIDTH / 2},
+	{0, 1, 0, IMAGE_HEIGHT / 2},
+	{0, 0, 1, 0},
+	{0, 0, 0, 1},
+	};
+
+	multiply_matrix4x4(matrix, rotate_z_matrix, to_origin_matrix);
+	multiply_matrix4x4(matrix, rotate_x_matrix, matrix);
+	multiply_matrix4x4(matrix, off_origin_matrix, matrix);
 }
 
 void	initialize_translation_matrix(t_mats *mats)
@@ -39,8 +59,8 @@ void	initialize_translation_matrix(t_mats *mats)
 
 	memcpy(mats->left, mat1, sizeof(mat1));
 	memcpy(mats->up, mat2, sizeof(mat2));
-	memcpy(mats->right, mat, sizeof(mat3));
-	memcpy(mats->down, mat, sizeof(mat4));	
+	memcpy(mats->right, mat3, sizeof(mat3));
+	memcpy(mats->down, mat4, sizeof(mat4));	
 }
 
 void	initialize_rotation_matrix_1(t_mats *mats)
@@ -70,12 +90,12 @@ void	initialize_rotation_matrix_1(t_mats *mats)
 
 void	initialize_rotation_matrix_2(t_mats *mats)
 {
-	const t_mat4	mat5 = {{(float)cos(), -(float)sin(), 0, 0},
-	{(float)sin(), (float)cos(), 0, 0},
+	const t_mat4	mat5 = {{(float)cos(-ROTATE_RAD), -(float)sin(-ROTATE_RAD), 0, 0},
+	{(float)sin(-ROTATE_RAD), (float)cos(-ROTATE_RAD), 0, 0},
 	{0, 0, 1, 0},
 	{0, 0, 0, 1}};
-	const t_mat4	mat6 = {{(float)cos(), -(float)sin(), 0, 0},
-	{(float)sin(), (float)cos(), 0, 0},
+	const t_mat4	mat6 = {{(float)cos(ROTATE_RAD), -(float)sin(ROTATE_RAD), 0, 0},
+	{(float)sin(ROTATE_RAD), (float)cos(ROTATE_RAD), 0, 0},
 	{0, 0, 1, 0},
 	{0, 0, 0, 1}};
 
@@ -85,7 +105,17 @@ void	initialize_rotation_matrix_2(t_mats *mats)
 
 void	initialize_scale_matrix(t_mats *mats)
 {
+	const t_mat4	mat1 = {{1 + SCALE_DELTA, 0, 0, 0},
+	{0, 1 + SCALE_DELTA, 0, 0},
+	{0, 0, 1 + SCALE_DELTA, 0},
+	{0, 0, 0, 1}};
+	const t_mat4	mat2 = {{1 - SCALE_DELTA, 0, 0, 0},
+	{0, 1 - SCALE_DELTA, 0, 0},
+	{0, 0, 1 - SCALE_DELTA, 0},
+	{0, 0, 0, 1}};
 
+	memcpy(mats->big, mat1, size0f(mat1));
+	memcpy(mats->small, mat2, size0f(mat2));	
 }
 
 void	TheInitializer(char *filename, t_ctx *ctx)
@@ -105,18 +135,3 @@ void	TheInitializer(char *filename, t_ctx *ctx)
 	initialize_scale_matrix(&ctx->mats);
 }
 
-typedef struct s_mats
-{
-	t_mat4	left;
-	t_mat4	up;
-	t_mat4	right;
-	t_mat4	down;
-	t_mat4	rotpx;
-	t_mat4	rotmx;
-	t_mat4	rotpy;
-	t_mat4	rotmy;
-	t_mat4	rotpz;
-	t_mat4	rotmz;
-	t_mat4	big;
-	t_mat4	small;	
-}	t_mats;
