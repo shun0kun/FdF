@@ -1,1 +1,2 @@
-cc *.c -Imlx -Lmlx -lmlx -rpath mlx -framework OpenGL -framework AppKit && ./a.out
+cc *.c -Ilibft -Llibft -lft -Ilibgnl -Llibgnl -lgnl -lmlx -lX11 -lXext -lm -o fdf
+./fdf

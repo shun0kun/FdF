@@ -6,15 +6,16 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/13 19:00:29 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/14 17:03:26 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# include "libft/libft.h"
+# include "libgnl/get_next_line.h"
 # include <mlx.h>
-// # include <ft.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdlib.h>
