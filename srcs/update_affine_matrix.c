@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "internal/fdf.h"
 
 void	normal_update(t_mat4 corrent, t_mat4 addition)
 {

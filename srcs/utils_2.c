@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "internal/fdf.h"
 
 void	init_to_origin_matrix(t_mat4 to_origin_matrix, t_point base_point)
 {

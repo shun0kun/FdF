@@ -6,11 +6,11 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:48 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/13 19:00:32 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:12:10 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "internal/fdf.h"
 
 unsigned int	ft_atohexaui(char *s)
 {

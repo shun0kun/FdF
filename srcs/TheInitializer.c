@@ -6,11 +6,11 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:56 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/14 16:05:28 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:12:10 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "internal/fdf.h"
 
 void	initialize_isometric_projection_matrix(t_mat4 matrix)
 {

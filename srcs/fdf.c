@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/16 19:53:34 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/13 19:00:30 by sshimots         ###   ########.fr       */
+/*   Created: 2025/07/16 19:53:24 by sshimots          #+#    #+#             */
+/*   Updated: 2025/08/15 20:41:51 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "internal/fdf.h"
 
-int	main(void)
+void	fdf(char *filename)
 {
-	fdf("sample.txt");
-	return (0);
+	t_ctx	ctx;
+
+	init_fdf_context(filename, &ctx);
+	check_input_file(&ctx);
+	build_map(&ctx);
+	render_grid(&ctx);
 }

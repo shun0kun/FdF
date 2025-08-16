@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "internal/fdf.h"
 
 void	initiate_dda_param(t_dda *dda, t_point p1, t_point p2)
 {

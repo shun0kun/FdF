@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "internal/fdf.h"
 
 t_point	multiply_matrix(t_ctx *ctx, float x[4][1])
 {

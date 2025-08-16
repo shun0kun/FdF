@@ -6,15 +6,15 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/14 17:03:26 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/15 18:41:45 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "libft/libft.h"
-# include "libgnl/get_next_line.h"
+# include <libft.h>
+# include "../../include/get_next_line.h"
 # include <mlx.h>
 # include <fcntl.h>
 # include <math.h>
@@ -22,15 +22,6 @@
 # include <unistd.h>
 # include "mlx_keycodes.h"
 # include "config.h"
-
-# define WINDOW_WIDTH			1920
-# define WINDOW_HEIGHT			1080
-# define IMAGE_WIDTH			1920
-# define IMAGE_HEIGHT			1080
-# define GRID_WIDTH				30
-# define GRID_HEIGHT			40
-# define GRID_ELEVATION			3
-# define GRID_DENSITY_INVERSE	2
 
 typedef float	t_mat4[4][4];
 
