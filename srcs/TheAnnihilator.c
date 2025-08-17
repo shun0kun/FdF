@@ -6,13 +6,13 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:43 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/17 12:59:48 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/08/17 16:17:01 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal/fdf.h"
 
-void	free_unit(t_ctx *ctx)
+void	free_points(t_ctx *ctx)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ void	cleanup_context(char *message, t_ctx *ctx)
 	if (ctx->fd < 0)
 		close(ctx->fd);
 	if (ctx->points != NULL)
-		free_unit(ctx);
+		free_points(ctx);
 	if (ctx->mlx.img != NULL)
 		mlx_destroy_image(ctx->mlx.mlx, ctx->mlx.img);
 	if (ctx->mlx.win != NULL)

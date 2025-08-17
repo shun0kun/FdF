@@ -6,7 +6,7 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/17 11:33:40 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/08/17 16:17:01 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 # define FDF_H
 
 # include <libft.h>
-# include "../../include/get_next_line.h"
+# include <get_next_line.h>
 # include <mlx.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <unistd.h>
 # include "mlx_keycodes.h"
 # include "config.h"
+
+typedef	enum e_error
+{
+	ERR_OK,
+	ERR_INVALID,
+	ERR_NOMEM,
+	ERR_IO
+}	t_error
 
 typedef float	t_mat4[4][4];
 

@@ -1,9 +1,16 @@
 #include <stdio.h>
 
+typedef enum e_err
+{
+	mon,
+	two = 2
+}	t_err;
+
 int	main(void)
 {
-	int	i = 30;
+	t_err	errno;
 
-	printf("%X\n", i);
+	errno = two;
+	printf("%d\n", errno);
 	return (0);
 }
