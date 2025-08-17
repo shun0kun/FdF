@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TheAnnihilator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:43 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/15 19:12:10 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/17 12:59:48 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_unit(t_ctx *ctx)
 	}
 }
 
-void	TheAnnihilator(char *message, t_ctx *ctx)
+void	cleanup_context(char *message, t_ctx *ctx)
 {
 	if (ctx->fd < 0)
 		close(ctx->fd);

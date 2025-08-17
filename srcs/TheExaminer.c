@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   TheExaminer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:52 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/15 19:12:10 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/17 12:59:14 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal/fdf.h"
 
-int	is_correct_token(char *token)
+int	is_valid_token(char *token)
 {
 	int	i;
 
@@ -38,40 +38,40 @@ int	is_correct_token(char *token)
 	return (1);
 }
 
-void	check_unit(char **tokens, t_ctx *ctx, int *start_flag)
+void	check_line(char **tokens, t_ctx *ctx, int *start_flag)
 {
 	int	count;
 
 	count = 0;
 	while (tokens[count])
 	{
-		if (!is_correct_token(tokens[count]))
-			TheAnnihilator(NULL, ctx);
+		if (!is_valid_token(tokens[count]))
+			cleanup_context(NULL, ctx);
 		count++;
 	}
 	if (!*start_flag && ctx->width != count)
-		TheAnnihilator(NULL, ctx);
+		cleanup_context(NULL, ctx);
 	*start_flag = 0;
 	ctx->width = count;
 }
 
-void	TheExaminer(t_ctx *ctx)
+void	check_input_file(t_ctx *ctx)
 {
 	int		fd;
 	char	*line;
 	char	**tokens;
-	int		start_flag;
+	int		is_first_line;
 
 	start_flag = 1;
 	fd = open(ctx->filename, O_RDONLY);
 	if (fd < 0)
-		TheAnnihilator(NULL, ctx);
+		cleanup_context(NULL, ctx);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		check_unit(ft_split(line), ctx, &start_flag);
+		check_line(ft_split(line), ctx, &is_first_line);
 		ctx->height++;
 	}
 	close(ctx->fd);

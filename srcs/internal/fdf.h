@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/15 18:41:45 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:33:40 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_ctx
 
 void	fdf(char *filename);
 void	TheInitializer(char *filename, t_ctx *ctx);
-void	TheExaminer(t_ctx *ctx);
+void	check_input_file(t_ctx *ctx);
 void	TheArchitect(t_ctx *ctx);
 void	TheManifestor(t_ctx *ctx);
 void	TheAnnihilator(char *message, t_ctx *ctx);

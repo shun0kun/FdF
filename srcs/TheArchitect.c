@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TheArchitect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:48 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/15 19:12:10 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/08/16 21:24:52 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	initialize_point(t_ctx *ctx, int i, int j, char *token)
 	ctx->points[i][j].color = extract_color_unit(token);
 }
 
-void	translate_unit(t_ctx *ctx)
+void	translate_map_file(t_ctx *ctx)
 {
 	char	*line;
 	char	**tokens;
@@ -154,6 +154,6 @@ void	TheArchitect(t_ctx *ctx)
 		i++;
 	}
 	initialize_base_point(ctx);
-	translate_unit(ctx);
+	translate_map_file(ctx);
 	close(ctx->fd);
 }
