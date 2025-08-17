@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef enum e_err
 {
@@ -9,8 +10,11 @@ typedef enum e_err
 int	main(void)
 {
 	t_err	errno;
+	bool	flag;
 
+	flag = 1;
 	errno = two;
-	printf("%d\n", errno);
+	if (flag)
+		printf("%d\n", errno);
 	return (0);
 }

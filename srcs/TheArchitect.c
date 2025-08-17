@@ -6,7 +6,7 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:48 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/17 16:37:14 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/08/17 20:51:29 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ unsigned int	ft_atohexaui(char *s)
 	{
 		if (s[i] >= '0' && s[i] <= '9')
 			dig = 0x00000000 + (s[i] - '0');
-		else
+		else (s[i] >= 'A' && s[i] <= 'F')
 			dig = 0x0000000A + (s[i] - 'A');
+		else
+			dig = 0x0000000A + (s[i] - 'a');
 		res = res * 16 + dig;
 		i++;
 	}
