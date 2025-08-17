@@ -6,7 +6,7 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:52 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/17 16:28:52 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/08/17 16:38:13 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,14 @@ t_error	validate_file(const char *filename)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		is_valid_line(line, &is_first_line);
+		if (!is_valid_line(line, &is_first_line))
+			return (ERR_INVALID);
 		free(line);
 		ctx->height++;
 	}
-	close(ctx->fd);
+	close(fd);
+	return (ERR_OK);
 }
 
 //get_next_lineの戻り値の型をt_errorにして、malloc失敗のNULLとファイル読み取り終了のNULLを区別する！
+//→このままだとget_next_lineがmalloc失敗した時にvalidate_fileはERR_OKを返してしまい、次の関数でバグる。
