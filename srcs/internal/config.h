@@ -1,6 +1,9 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
+# define INT_MIN				-2147483648
+# define INT_MAX				2147483647
+
 # define WINDOW_WIDTH			1920
 # define WINDOW_HEIGHT			1080
 # define IMAGE_WIDTH			1920

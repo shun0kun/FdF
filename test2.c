@@ -1,7 +1,10 @@
-#define INT_MAX	2147483647
-#define INT_MIN	-2147483648
-#include <stdbool.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <libft.h>
+#include <get_next_line.h>
+
 
 bool	is_digit(char c)
 {
@@ -11,6 +14,21 @@ bool	is_digit(char c)
 bool	is_hex_digit(char c)
 {
 	return ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'));
+}
+
+void	free_str_array(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
 bool	is_hex_unsigned_int(char *token)
@@ -112,10 +130,65 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-// 1234,0x42fB
-// INT_MIN = -2147483648
-// INT_MAX = 2147483647
+int	validate_line(const char *line, int *expected_cols, int *is_first_line)
+{
+	char	**tokens;
+	int		count;
 
-//排他的論理和を表す関数や式を考える。
+	tokens = ft_split(line, ' ');
+	if (!tokens)
+		return (0);
+	count = 0;
+	while (tokens[count])
+	{
+		if (!is_valid_token(tokens[count]))
+		{
+			free_str_array(tokens);
+			return (0);
+		}
+		count++;
+	}
+	free_str_array(tokens);
+	if (*is_first_line)
+	{
+		*expected_cols = count;
+		*is_first_line = 0;
+	}
+	else if (count != *expected_cols)
+		return (0);
+	return (1);
+}
 
-//8進数対策を入れる。08,1234とかが許可されてしまっている。ただの0を排除しないように気を付ける。
+int	validate_file(const char *filename)
+{
+	int		fd;
+	char	*line;
+	int		is_first_line;
+	int		expected_cols;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	is_first_line = 1;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		if (!validate_line(line, &expected_cols, &is_first_line))
+		{
+			free(line);
+			close(fd);
+			return (0);
+		}
+		free(line);
+	}
+	close(fd);
+	return (1);
+}
+
+int	main(void)
+{
+	printf("%d\n", validate_file("in.txt"));
+	return (0);
+}

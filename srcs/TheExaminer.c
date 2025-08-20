@@ -6,65 +6,133 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:52 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/18 00:54:10 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/08/20 22:12:59 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal/fdf.h"
 
-int	is_digit(char c)
+bool	is_digit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int	is_hex_digit(char c)
+bool	is_hex_digit(char c)
 {
 	return ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'));
 }
 
-void	free_tokens(char **tokens)
+void	free_str_array(char **arr)
 {
 	int	i;
 
-	if (tokens)
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
 	{
-		i = 0;
-		while (tokens[i])
-		{
-			free(tokens[i]);
-			i++;
-		}
+		free(arr[i]);
+		i++;
 	}
-	free(tokens);
+	free(arr);
 }
 
-//要訂正
-int	validate_token(const char *token)
+bool	is_hex_unsigned_int(char *token)
 {
-	int	i;
 	int	count;
 
+	if (!*token || *token != '0')
+		return (false);
+	token++;
+	if (!*token || (*token != 'X' && *token != 'x'))
+		return (false);
+	token++;
+	count = 0;
+	while (is_hex_digit(token[count]))
+		count++;
+	if (count == 0 || count > 8 || token[count] != '\0')
+		return (false);
+	return (true);
+}
+
+bool	is_int(char *n, bool is_minus)
+{
+	char	*int_max;
+	char	*int_min_abs;
+	int		i;
+
+	int_max = "2147483647";
+	int_min_abs = "2147483648";
 	i = 0;
-	while (is_digit(token[i]))
+	if (is_minus)
+		while (i < 10)
+		{
+			if (n[i] > int_min_abs[i])
+				return (false);
+			i++;
+		}
+	else
+		while (i < 10)
+		{
+			if (n[i] > int_max[i])
+				return (false);
+			i++;
+		}		
+	return (true);
+}
+
+bool	is_octal_number(char *token)
+{
+	if (!*token)
+		return (false);
+	else if (!*(token + 1))
+		return (false);
+	if (*token =='0' && is_digit(*(token + 1)))
+		return (true);
+	else
+		return (false);
+}
+
+void	convert_newline_to_null(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] || line[i] != '\n')
 		i++;
-	if (i == 0 || token[i] == '\0')
-		return (0);
-	else if (token[i] == ',')
+	if (!line[i])
+		return ;
+	else if (line[i] == '\n')
+		line[i] = '\0';
+}
+
+bool	is_valid_token(char *token)
+{
+	int		count;
+	bool	is_minus;
+
+	is_minus = 0;
+	if (*token == '+' || (*token == '-' && !is_minus++))
+		token++;
+	if (is_octal_number(token))
+		return (false);
+	count = 0;
+	while (token[count] && is_digit(token[count]))
+		count++;
+	if (count == 0 || count > 10 || (count == 10 && !is_int(token, is_minus)))
+		return (false);
+	if (*(token + count) == ',')
 	{
-		i++;
-		if (token[i] == '\0' || token[i] != '0')
-			return (0);
-		i++;
-		if (token[i] == '\0' || (token[i] != 'x' && token[i] != 'X'))
-			return (0);
-		i++;
-		count = 0;
-		while (is_hex_digit(token[i + count]))
-			count++;
-		if (count == 0 || count > 8)
-			return (0);
+		token += count + 1;
+		if (!is_hex_unsigned_int(token))
+			return (false);
+		else
+			return (true);
 	}
-	return (1);
+	else if (*(token + count) == '\0')
+		return (true);
+	else
+		return (false);
 }
 
 int	validate_line(const char *line, int *expected_cols, int *is_first_line)
@@ -78,9 +146,9 @@ int	validate_line(const char *line, int *expected_cols, int *is_first_line)
 	count = 0;
 	while (tokens[count])
 	{
-		if (!validate_token(tokens[count]))
+		if (!is_valid_token(tokens[count]))
 		{
-			free_tokens(tokens);
+			free_str_array(tokens);
 			return (0);
 		}
 		count++;
@@ -112,6 +180,7 @@ int	validate_file(const char *filename)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		convert_newline_to_null(line);
 		if (!validate_line(line, &expected_cols, &is_first_line))
 		{
 			free(line);
@@ -132,3 +201,4 @@ int	validate_file(const char *filename)
 //ファイルの空行、line最後の改行(実質同じだが)をどうするのかを考えておく。
 //validate_tokenのオーバーフロー処理、マイナスintへの対応
 //splitもしかしたらタブでも区切らなきゃいけないかもしれない
+//n1_is_bigger_than_n2関数考えてみる。今回は使わないと思うけど。
