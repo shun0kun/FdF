@@ -60,3 +60,7 @@ void	edit_points(t_ctx *ctx, int keycode)
 		i++;
 	}
 }
+
+//base_pointも編集しないと！
+
+//ctxのheight, width, points, affine_matrixを使う。

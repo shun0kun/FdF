@@ -6,11 +6,40 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:48 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/17 20:51:29 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/06 10:12:26 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal/fdf.h"
+
+void	initialize_base_point(t_ctx *ctx)
+{
+	int	z_max;
+	int	z_min;
+	int	i;
+	int	j;
+
+	z_max = 0;
+	z_min = 0;
+	i = 0;
+	while (i < ctx->height)
+	{
+		j = 0;
+		while (j < ctx->width)
+		{
+			if (z_max > ctx->points[i][j].z)
+				z_max = ctx->points[i][j].z;
+			if (z_min < ctx->points[i][j].z)
+				z_min = ctx->points[i][j].z;
+			j++;
+		}
+		i++;
+	}
+	ctx->base_point.x = IMAGE_WIDTH / 2;
+	ctx->base_point.y = IMAGE_HEIGHT / 2;
+	ctx->base_point.z = (int)((float)(z_max + z_min) / (float)2);
+	ctx->base_point.color = 0x00000000;
+}
 
 unsigned int	ft_atohexaui(char *s)
 {
@@ -61,101 +90,56 @@ unsigned int	extract_color_unit(char *token)
 int	ft_atoi(char *s)
 {
 	int	i;
-	int	nb;
+	int	n;
 
 	i = 0;
-	nb = 0;
+	n = 0;
 	while (s[i] >= '0' && s[i] <= '9')
 	{
-		nb += s[i] - '0';
-		nb *= 10;
+		n += s[i] - '0';
+		n *= 10;
 		i++;
 	}
-	return (nb);
+	return (n);
 }
 
-void	initialize_point(t_ctx *ctx, int i, int j, char *token)
+void	convert_token_to_point(t_point **points, int i, int j, char *token)
 {
-	ctx->points[i][j].x = ctx->start_point.x + GRID_WIDTH * j;
-	ctx->points[i][j].y = ctx->start_point.y + GRID_HEIGHT * i;
-	ctx->points[i][j].z = GRID_ELEVATION * ft_atoi(token);
-	ctx->points[i][j].color = extract_color_unit(token);
+	points[i][j].x = (IMAGE_WIDTH / 2 - GRID_WIDTH * ctx->width / 2)
+					+ GRID_WIDTH * j;
+	points[i][j].y = (IMAGE_HEIGHT / 2 - GRID_HEIGHT * ctx->height / 2)
+					+ GRID_HEIGHT * i;
+	points[i][j].z = GRID_ELEVATION * ft_atoi(token);
+	points[i][j].color = extract_color_unit(token);
 }
 
-void	translate_map_file(t_ctx *ctx)
+int	convert_file_to_points(const char *filename, t_grid *grid)
 {
+	int		fd;
 	char	*line;
 	char	**tokens;
 	int		i;
 	int		j;
 
-	ctx->fd = open(ctx->filename, O_RDONLY);
-	if (ctx->fd < 0)
-		TheAnnihilator("File open fail\n", ctx);
-	ctx->start_point.x = IMAGE_WIDTH / 2 - GRID_WIDTH * ctx->width / 2;
-	ctx->start_point.y = IMAGE_HEIGHT / 2 - GRID_HEIGHT * ctx->height / 2;
-	ctx->start_point.z = 0;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
 	i = 0;
 	while (1)
 	{
-		line = get_next_line(ctx->fd);
+		line = get_next_line(fd);
 		if (!line)
 			break ;
-		tokens = ft_split(line, " ");
-		while (j < ctx->width)
-		{
-			initialize_point(ctx, i, j, tokens[j]);
-			j++;
-		}
+		convert_newline_to_null(line);
+		tokens = ft_split(line, ' ');
+		j = -1;
+		while (++j < grid->cols)
+			convert_token_to_point(grid->points, i, j, tokens[j]);
+		free_tokens(tokens);
+		free(line);
 		i++;
 	}
+	close(fd);
 }
+//3行減らす！！
 
-void	initialize_base_point(t_ctx *ctx)
-{
-	int	z_max;
-	int	z_min;
-	int	i;
-	int	j;
-
-	z_max = 0;
-	z_min = 0;
-	i = 0;
-	while (i < ctx->height)
-	{
-		j = 0;
-		while (j < ctx->width)
-		{
-			if (z_max > ctx->points[i][j].z)
-				z_max = ctx->points[i][j].z;
-			if (z_min < ctx->points[i][j].z)
-				z_min = ctx->points[i][j].z;
-			j++;
-		}
-		i++;
-	}
-	ctx->base_point.x = IMAGE_WIDTH / 2;
-	ctx->base_point.y = IMAGE_HEIGHT / 2;
-	ctx->base_point.z = (int)((float)(z_max + z_min) / (float)2);
-	ctx->base_point.color = 0x00000000;
-}
-
-void	TheArchitect(t_ctx *ctx)
-{
-	int	i;
-
-	i = 0;
-	ctx->points = malloc(ctx->height * sizeof(t_point *));
-	if (!ctx->points)
-		Annihilator("Memory allocate fale\n", ctx);
-	while (i < ctx->height)
-	{
-		ctx->points[i] = malloc(ctx->width * sizeof(t_point));
-		if (!ctx->points[i])
-			TheAnnihilator("Memory allocate fale\n", ctx);
-		i++;
-	}
-	initialize_base_point(ctx);
-	translate_map_file(ctx);
-	close(ctx->fd);
-}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TheManifestor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:59 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/15 19:12:10 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/11 12:22:54 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ctl_keypress(int keycode, void *param)
 	}
 	else
 	{
-		updata_affine_matrix(ctx, keycode);
+		update_affine_matrix(ctx, keycode);
 		edit_points(ctx, keycode);
 		clean_image(ctx);
 		draw_grid(ctx);
@@ -52,3 +52,7 @@ void	TheManifestor(t_ctx *ctx)
 //安全のためにclampいれてもいいかも！
 //エンディアンを考慮して色を抽出する必要がある。週出自と再構成時は逆順でいれる。
 //必要ならラッパ関数を作っても良い
+
+//t_mlx, height, width, points, affine_matrix, matsを使う。
+//heightとwidthはexaminorの後に別個で取得して、architectに渡そう。pointsとbasepointはarchitectで作って、maniに渡す。pointsとbase_pointは合体させてもいいかも。
+//→affine_matrixとmatsはmanifestorのローカルで使えばOK!

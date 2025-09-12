@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:34 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/15 18:41:45 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:27:45 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

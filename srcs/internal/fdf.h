@@ -6,7 +6,7 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/17 16:17:01 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/11 13:26:36 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,7 @@
 # include "mlx_keycodes.h"
 # include "config.h"
 
-typedef	enum e_error
-{
-	ERR_OK,
-	ERR_INVALID,
-	ERR_NOMEM,
-	ERR_IO
-}	t_error
-
 typedef float	t_mat4[4][4];
-
-typedef struct s_dda
-{
-	int		steps;
-	float	x;
-	float	y;
-	float	a;
-	float	b;
-	float	g;
-	float	r;
-	float	x_inc;
-	float	y_inc;
-	float	a_inc;
-	float	b_inc;
-	float	g_inc;
-	float	r_inc;
-}	t_dda;
 
 typedef struct s_point
 {
@@ -70,35 +45,54 @@ typedef struct s_mlx
 	int		endian;
 }	t_mlx;
 
-typedef struct s_mats
+typedef struct s_transforms
 {
-	t_mat4	left;
-	t_mat4	up;
-	t_mat4	right;
-	t_mat4	down;
-	t_mat4	rotpx;
-	t_mat4	rotmx;
-	t_mat4	rotpy;
-	t_mat4	rotmy;
-	t_mat4	rotpz;
-	t_mat4	rotmz;
-	t_mat4	big;
-	t_mat4	small;	
-}	t_mats;
+	t_mat4	translate_left;
+	t_mat4	translate_up;
+	t_mat4	translate_right;
+	t_mat4	translate_down;
+	t_mat4	rotate_x_plus;
+	t_mat4	rotate_x_minus;
+	t_mat4	rotate_y_plus;
+	t_mat4	rotate_y_minus;
+	t_mat4	rotate_z_plus;
+	t_mat4	rotate_z_minus;
+	t_mat4	scale_up;
+	t_mat4	scale_down;	
+}	t_transforms;
 
-typedef struct s_ctx
+typedef struct s_dda
 {
-	char	*filename;
-	int		fd;
-	int		width;
-	int		height;
-	t_mat4	affine_matrix;
-	t_mats	mats;
+	int		steps;
+	float	x;
+	float	y;
+	float	r;
+	float	g;
+	float	b;
+	float	a;
+	float	x_inc;
+	float	y_inc;
+	float	r_inc;
+	float	g_inc;
+	float	b_inc;
+	float	a_inc;
+}	t_dda;
+
+typedef struct s_grid
+{
 	t_point	**points;
+	int		cols;
+	int		rows;
 	t_point	base_point;
-	t_point	start_point;
-	t_mlx	mlx;
-}	t_ctx;
+}	t_grid;
+
+typedef struct s_render
+{
+	t_grid			grid;
+	t_mlx			mlx;
+	t_mat4			model;
+	t_transforms	transforms;
+}	t_render;
 
 void	fdf(char *filename);
 void	TheInitializer(char *filename, t_ctx *ctx);

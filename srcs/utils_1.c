@@ -16,17 +16,17 @@ int	ft_max(int m, int n)
 		return (n);
 }
 
-void	put_pixel_to_image(t_ctx *ctx, t_point point)
+void	put_pixel_to_image(t_mlx mlx, t_point point)
 {
 	if (point.x >= 0 && point.x < IMAGE_WIDTH && point.y >= 0
 		&& point.y < IMAGE_HEIGHT)
 	{
-		*(unsigned int *)(ctx->mlx.addr + point.y * ctx->mlx.ll + point.x
-				* (ctx->mlx.bpp / 8)) = point.color;
+		*(unsigned int *)(mlx.addr + point.y * mlx.ll + point.x
+				* (mlx.bpp / 8)) = point.color;
 	}
 }
 
-void	clean_image(t_ctx *ctx)
+void	clean_image(t_mlx mlx)
 {
 	t_point	p;
 
@@ -36,7 +36,7 @@ void	clean_image(t_ctx *ctx)
 		p.x = 0;
 		while (p.x < IMAGE_WIDTH)
 		{
-			put_pixel_to_image(ctx, p);
+			put_pixel_to_image(mlx, p);
 			p.x++;
 		}
 		p.y++;

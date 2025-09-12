@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TheInitializer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:56 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/15 19:12:10 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:06:29 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

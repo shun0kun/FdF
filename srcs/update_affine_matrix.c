@@ -56,3 +56,5 @@ void	update_affine_matrix_1(t_ctx *ctx, int keycode)
 	else 
 		abnormal_update_affine_matrix_2(ctx, keycode);	
 }
+
+//mat, affine_matrix, base_pointを使う。

@@ -6,7 +6,7 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:52 by sshimots          #+#    #+#             */
-/*   Updated: 2025/08/20 22:12:59 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/03 14:06:27 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ bool	is_hex_digit(char c)
 	return ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'));
 }
 
-void	free_str_array(char **arr)
+void	free_tokens(char **tokens)
 {
 	int	i;
 
-	if (!arr)
+	if (!tokens)
 		return ;
 	i = 0;
-	while (arr[i])
+	while (tokens[i])
 	{
-		free(arr[i]);
+		free(tokens[i]);
 		i++;
 	}
-	free(arr);
+	free(tokens);
 }
 
 bool	is_hex_unsigned_int(char *token)
@@ -87,7 +87,7 @@ bool	is_octal_number(char *token)
 		return (false);
 	else if (!*(token + 1))
 		return (false);
-	if (*token =='0' && is_digit(*(token + 1)))
+	if (*token == '0' && is_digit(*(token + 1)))
 		return (true);
 	else
 		return (false);
@@ -140,18 +140,18 @@ int	validate_line(const char *line, int *expected_cols, int *is_first_line)
 	char	**tokens;
 	int		count;
 
+	convert_newline_to_null(line);
 	tokens = ft_split(line, ' ');
 	if (!tokens)
 		return (0);
 	count = 0;
 	while (tokens[count])
 	{
-		if (!is_valid_token(tokens[count]))
+		if (!is_valid_token(tokens[count++]))
 		{
-			free_str_array(tokens);
+			free_tokens(tokens);
 			return (0);
 		}
-		count++;
 	}
 	free_tokens(tokens);
 	if (*is_first_line)
@@ -164,24 +164,24 @@ int	validate_line(const char *line, int *expected_cols, int *is_first_line)
 	return (1);
 }
 
-int	validate_file(const char *filename)
+int	validate_file(const char *filename, int *out_cols, int *out_rows)
 {
 	int		fd;
 	char	*line;
 	int		is_first_line;
-	int		expected_cols;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (0);
+	*out_rows = 0;
 	is_first_line = 1;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		convert_newline_to_null(line);
-		if (!validate_line(line, &expected_cols, &is_first_line))
+		*out_rows++;
+		if (!validate_line(line, out_cols, &is_first_line))
 		{
 			free(line);
 			close(fd);
@@ -192,6 +192,7 @@ int	validate_file(const char *filename)
 	close(fd);
 	return (1);
 }
+//filenameではなく、fdを渡す設計にする。そうすることで、parse_width_and_height
 
 //get_next_lineの戻り値の型をt_errorにして、malloc失敗のNULLとファイル読み取り終了のNULLを区別する！
 //→このままだとget_next_lineがmalloc失敗した時にvalidate_fileはERR_OKを返してしまい、次の関数でバグる。
@@ -202,3 +203,5 @@ int	validate_file(const char *filename)
 //validate_tokenのオーバーフロー処理、マイナスintへの対応
 //splitもしかしたらタブでも区切らなきゃいけないかもしれない
 //n1_is_bigger_than_n2関数考えてみる。今回は使わないと思うけど。
+
+//空ファイル、空白onlyファイルを通す気がする。

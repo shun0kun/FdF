@@ -61,23 +61,26 @@ void	draw_line_dda(t_ctx *ctx, t_point p1, t_point p2)
 	}
 }
 
-void	draw_grid(t_ctx *ctx)
+void	draw_grid(t_mlx mlx, t_grid grid)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < ctx->height)
+	while (i < grid.rows)
 	{
 		j = 0;
-		while (j < ctx->width)
+		while (j < grid.cols)
 		{
-			if (j + 1 < ctx->width)
-				draw_line_dda(ctx, ctx->points[i][j], ctx->points[i][j + 1]);
-			if (i + 1 < ctx->height)
-				draw_line_dda(ctx, ctx->points[i][j], ctx->points[i + 1][j]);
+			if (j + 1 < grid.cols)
+				draw_line_dda(ctx, grid.points[i][j], grid.points[i][j + 1]);
+			if (i + 1 < grid.rows)
+				draw_line_dda(ctx, grid.points[i][j], grid.points[i + 1][j]);
 			j++;
 		}
 		i++;
 	}
 }
+
+//ctxの内、height, width, pointsを使う
+//ddaはローカルにしよう。
