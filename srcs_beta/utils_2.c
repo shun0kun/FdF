@@ -20,7 +20,7 @@ void	init_off_origin_matrix(t_mat4 off_origin_matrix, t_point base_point)
 	memcpy(off_origin_matrix, a, sizeof(a));
 }
 
-void	multiply_matrix4x4(t_mat4 leftmat, t_mat4 rightmat, t_mat4 res)
+void	multiply_matrix4x4(t_mat4 res, t_mat4 leftmat, t_mat4 rightmat)
 {
 	t_mat4	rightmat_copy;
 	t_mat4	leftmat_copy;

@@ -34,7 +34,7 @@ t_point	construct_pixel(t_dda dda)
 	return (p);
 }
 
-void	draw_line_dda(t_mlx mlx, t_point p1, t_point p2)
+void	draw_line_dda(t_ctx *ctx, t_point p1, t_point p2)
 {
 	t_point	p;
 	t_dda	dda;
@@ -43,14 +43,14 @@ void	draw_line_dda(t_mlx mlx, t_point p1, t_point p2)
 	initiate_dda_param(&dda, p1, p2);
 	if (dda.steps == 0)
 	{
-		put_pixel_to_image(mlx, p1);
+		put_pixel_to_image(ctx, p1);
 		return ;
 	}
 	i = 0;
 	while (i <= dda.steps)
 	{
 		p = construct_pixel(dda);
-		put_pixel_to_image(mlx, p);
+		put_pixel_to_image(ctx, p);
 		dda.x += dda.x_inc;
 		dda.y += dda.y_inc;
 		dda.a += dda.a_inc;
@@ -73,9 +73,9 @@ void	draw_grid(t_mlx mlx, t_grid grid)
 		while (j < grid.cols)
 		{
 			if (j + 1 < grid.cols)
-				draw_line_dda(mlx, grid.points[i][j], grid.points[i][j + 1]);
+				draw_line_dda(ctx, grid.points[i][j], grid.points[i][j + 1]);
 			if (i + 1 < grid.rows)
-				draw_line_dda(mlx, grid.points[i][j], grid.points[i + 1][j]);
+				draw_line_dda(ctx, grid.points[i][j], grid.points[i + 1][j]);
 			j++;
 		}
 		i++;

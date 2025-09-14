@@ -6,7 +6,7 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/12 20:19:36 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/11 13:26:36 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ typedef struct s_transforms
 	t_mat4	rotate_z_minus;
 	t_mat4	scale_up;
 	t_mat4	scale_down;	
-	t_mat4	to_origin;
-	t_mat4	from_origin;
 }	t_transforms;
 
 typedef struct s_dda

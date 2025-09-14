@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/16 19:53:24 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/12 19:44:32 by shimotsukas      ###   ########.fr       */
+/*   Created: 2025/07/16 19:53:34 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/03 14:27:45 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal/fdf.h"
 
-int	fdf(char *filename)
+int	main(void)
 {
-	t_grid	grid;
-
-	if (!validate_file(filename, &grid.cols, &grid.rows))
-		return (0);
-	grid.points = create_points(grid.cols, grid.rows);
-	if (!grid.points)
-		return (0);
-	if (!convert_file_to_points(filename, grid))
-	{
-		destroy_points(grid.points, grid.rows);
-		return (0);
-	}
-	start_rendering(&grid);
+	fdf("sample.txt");
+	return (0);
 }
-

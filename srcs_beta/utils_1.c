@@ -43,7 +43,7 @@ void	clean_image(t_mlx mlx)
 	}
 }
 
-void	fill_matrix4x4_zero(t_mat4 mat)
+void	fill_matrix4x4_zero(t_mat4 x)
 {
 	int	i;
 	int	j;
@@ -54,7 +54,7 @@ void	fill_matrix4x4_zero(t_mat4 mat)
 		j = 0;
 		while (j < 4)
 		{
-			mat[i][j] = 0;
+			x[i][j] = 0;
 			j++;
 		}
 		i++;

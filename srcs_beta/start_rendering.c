@@ -1,16 +1,5 @@
 #include "internal/fdf.h"
 
-t_render	init_render(t_grid *grid, t_mlx mlx)
-{
-	t_render	render;
-
-	render.grid = *grid;
-	render.mlx = mlx;
-	render.model = init_model();
-	render.transforms = init_transforms();
-	return (render);
-}
-
 int	control_keypress(int keycode, void *param)
 {
 	t_render	*render;
@@ -26,7 +15,7 @@ int	control_keypress(int keycode, void *param)
 	}
 	else
 	{
-		update_model(render->model, render->transforms, keycode);
+		update_model(render->model, render->transforms);
 		update_points(render->grid, render->model);
 		clean_image(render->mlx);
 		draw_grid(render->mlx, render->grid);
