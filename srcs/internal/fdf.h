@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/12 20:19:36 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/14 17:10:01 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,7 @@ typedef struct s_render
 	t_transforms	transforms;
 }	t_render;
 
-void	fdf(char *filename);
-void	TheInitializer(char *filename, t_ctx *ctx);
-void	check_input_file(t_ctx *ctx);
-void	TheArchitect(t_ctx *ctx);
-void	TheManifestor(t_ctx *ctx);
-void	TheAnnihilator(char *message, t_ctx *ctx);
-
-int		ft_abs(int n);
-int		ft_max(int m, int n);
-int		iroundf(float x);
+void	init_transforms(t_transforms *transforms);
 
 #endif
 

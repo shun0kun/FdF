@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:24 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/12 19:44:32 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/14 15:01:49 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	fdf(char *filename)
 		destroy_points(grid.points, grid.rows);
 		return (0);
 	}
+	create_base_point(&grid);
 	start_rendering(&grid);
 }
 

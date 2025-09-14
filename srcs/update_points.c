@@ -27,19 +27,19 @@ void	mat4_mul_vec4(t_mat4 model, float vec[4][1])
 	vec[3][0] = new_vec[3][0];
 }
 
-void	update_point(t_point **points, t_mat4 model, int i, int j)
+void	update_point(t_point *point, t_mat4 model)
 {
 	float	vec[4][1];
 	float	new_vec[4][1];
 
-	vec[0][0] = points[i][j].x;
-	vec[1][0] = points[i][j].y;
-	vec[2][0] = points[i][j].z;
+	vec[0][0] = point->x;
+	vec[1][0] = point->y;
+	vec[2][0] = point->z;
 	vec[3][0] = 1;
 	mat4_mul_vec4(model, vec);
-	points[i][j].x = vec[0][0];
-	points[i][j].y = vec[1][0];
-	points[i][j].z = vec[2][0];	
+	point->x = vec[0][0];
+	point->y = vec[1][0];
+	point->z = vec[2][0];	
 }
 
 void	update_points(t_grid grid, t_mat4 model)
@@ -53,9 +53,14 @@ void	update_points(t_grid grid, t_mat4 model)
 		j = 0;
 		while (j < grid.cols)
 		{
-			update_point(grid.points, model, i, j);
+			update_point(&grid.points[i][j], model);
 			j++;
 		}
 		i++;
 	}
+}
+
+void	update_base_point(t_point *base_point, t_mat4 model)
+{
+	update_point(base_point, model);
 }

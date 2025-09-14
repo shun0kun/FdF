@@ -36,7 +36,7 @@ void	destroy_points(t_point **points, int rows)
 	i = 0;
 	while (i < rows)
 	{
-		free(points[i])
+		free(points[i]);
 		i++;
 	}
 	free(points);

@@ -3,43 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   convert_file_to_points.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:48 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/12 23:13:50 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/14 15:28:18 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal/fdf.h"
-
-void	initialize_base_point(t_ctx *ctx)
-{
-	int	z_max;
-	int	z_min;
-	int	i;
-	int	j;
-
-	z_max = 0;
-	z_min = 0;
-	i = 0;
-	while (i < ctx->height)
-	{
-		j = 0;
-		while (j < ctx->width)
-		{
-			if (z_max > ctx->points[i][j].z)
-				z_max = ctx->points[i][j].z;
-			if (z_min < ctx->points[i][j].z)
-				z_min = ctx->points[i][j].z;
-			j++;
-		}
-		i++;
-	}
-	ctx->base_point.x = IMAGE_WIDTH / 2;
-	ctx->base_point.y = IMAGE_HEIGHT / 2;
-	ctx->base_point.z = (int)((float)(z_max + z_min) / (float)2);
-	ctx->base_point.color = 0x00000000;
-}
 
 unsigned int	ft_atohexaui(char *s)
 {
@@ -53,7 +24,7 @@ unsigned int	ft_atohexaui(char *s)
 	{
 		if (s[i] >= '0' && s[i] <= '9')
 			dig = 0x00000000 + (s[i] - '0');
-		else (s[i] >= 'A' && s[i] <= 'F')
+		else if (s[i] >= 'A' && s[i] <= 'F')
 			dig = 0x0000000A + (s[i] - 'A');
 		else
 			dig = 0x0000000A + (s[i] - 'a');
@@ -103,14 +74,14 @@ int	ft_atoi(char *s)
 	return (n);
 }
 
-void	convert_token_to_point(t_point **points, int i, int j, char *token)
+void	convert_token_to_point(t_grid *grid, int i, int j, char *token)
 {
-	points[i][j].x = (IMAGE_WIDTH / 2 - GRID_WIDTH * ctx->width / 2)
+	grid->points[i][j].x = (IMAGE_WIDTH / 2 - GRID_WIDTH * grid->cols / 2)
 					+ GRID_WIDTH * j;
-	points[i][j].y = (IMAGE_HEIGHT / 2 - GRID_HEIGHT * ctx->height / 2)
+	grid->points[i][j].y = (IMAGE_HEIGHT / 2 - GRID_HEIGHT * grid->rows / 2)
 					+ GRID_HEIGHT * i;
-	points[i][j].z = GRID_ELEVATION * ft_atoi(token);
-	points[i][j].color = extract_color_unit(token);
+	grid->points[i][j].z = GRID_ELEVATION * ft_atoi(token);
+	grid->points[i][j].color = extract_color_unit(token);
 }
 
 int	convert_file_to_points(const char *filename, t_grid *grid)
@@ -134,12 +105,10 @@ int	convert_file_to_points(const char *filename, t_grid *grid)
 		tokens = ft_split(line, ' ');
 		j = -1;
 		while (++j < grid->cols)
-			convert_token_to_point(grid->points, i, j, tokens[j]);
+			convert_token_to_point(grid, i, j, tokens[j]);
 		free_tokens(tokens);
 		free(line);
 		i++;
 	}
 	close(fd);
 }
-//3行減らす！！
-
