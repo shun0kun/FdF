@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/16 19:53:34 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/16 11:36:28 by shimotsukas      ###   ########.fr       */
+/*   Created: 2025/04/30 15:29:49 by sshimots          #+#    #+#             */
+/*   Updated: 2025/05/07 20:53:06 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_toupper(int c)
 {
-	if (argc != 2)
-		return (-1);
-	fdf(argv[1]);
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		c -= ('a' - 'A');
+	return (c);
 }
