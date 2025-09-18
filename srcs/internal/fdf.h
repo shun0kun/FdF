@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/14 17:10:01 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:09:02 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,19 @@ typedef struct s_render
 	t_transforms	transforms;
 }	t_render;
 
+int		fdf(const char *filename);
+int		validate_file(const char *filename, int *out_cols, int *out_rows);
+t_point	**create_points(int cols, int rows);
+void	destroy_points(t_point **points, int rows);
+int		convert_file_to_points(const char *filename, t_grid *grid);
+void	create_base_point(t_grid *grid);
+void	start_rendering(t_grid *grid);
+void	init_model(t_mat4 model);
 void	init_transforms(t_transforms *transforms);
+void	init_to_origin_transform(t_transforms *transforms);
+void	init_from_origin_transforms(t_transforms *transforms);
+
+
 
 #endif
 
-//TheExaminerにオーバーフロー処理入れる。

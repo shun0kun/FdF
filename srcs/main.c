@@ -6,14 +6,16 @@
 /*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:34 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/03 14:27:45 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/16 11:36:28 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal/fdf.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	fdf("sample.txt");
+	if (argc != 2)
+		return (-1);
+	fdf(argv[1]);
 	return (0);
 }

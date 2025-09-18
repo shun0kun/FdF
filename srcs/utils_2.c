@@ -48,3 +48,13 @@ void	multiply_matrix4x4(t_mat4 leftmat, t_mat4 rightmat, t_mat4 res)
 		i++;
 	}
 }
+
+bool	is_digit(char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+bool	is_hex_digit(char c)
+{
+	return ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'));
+}

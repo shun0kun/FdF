@@ -1,5 +1,20 @@
 #include "internal/fdf.h"
 
+void	update_to_from_origin(t_mat4 to_origin, t_mat4 from_origin, t_point base_point)
+{
+	const t_mat4	mat1 = {{1, 0, 0, -(float)base_point.x},
+							{0, 1, 0, -(float)base_point.y},
+							{0, 0, 1, -(float)base_point.z},
+							{0, 0, 0, 1}};
+	const t_mat4	mat2 = {{1, 0, 0, (float)base_point.x},
+							{0, 1, 0, (float)base_point.y},
+							{0, 0, 1, (float)base_point.z},
+							{0, 0, 0, 1}};
+
+	ft_memcpy(to_origin, mat1, sizeof(mat1));
+	fd_memcpy(from_origin, mat2, sizeof(mat2));
+}
+
 t_render	init_render(t_grid *grid, t_mlx mlx)
 {
 	t_render	render;
@@ -26,6 +41,7 @@ int	control_keypress(int keycode, void *param)
 	}
 	else
 	{
+		update_to_from_origin(render->transforms.to_origin, render->transforms.from_origin, render->grid.base_point);
 		update_model(render->model, render->transforms, keycode);
 		update_points(render->grid, render->model);
 		clean_image(render->mlx);
