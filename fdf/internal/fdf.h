@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/16 12:09:02 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/19 17:46:00 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int		validate_file(const char *filename, int *out_cols, int *out_rows);
 t_point	**create_points(int cols, int rows);
 void	destroy_points(t_point **points, int rows);
 int		convert_file_to_points(const char *filename, t_grid *grid);
+void	convert_newline_to_null(char *line);
+void	free_tokens(char **tokens);
 void	create_base_point(t_grid *grid);
 void	start_rendering(t_grid *grid);
 void	init_model(t_mat4 model);

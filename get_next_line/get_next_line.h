@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:41:10 by sshimots          #+#    #+#             */
-/*   Updated: 2025/05/25 12:45:55 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/19 17:39:18 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ char	*get_line_and_trim(char *stash);
 char	*free_and_return_null(char **p1, char **p2);
 bool	has_line_break(char *s);
 void	free_and_nullify(char **p);
-size_t	ft_strlen(char *s);
+size_t	gnl_strlen(char *s);
 
 #endif

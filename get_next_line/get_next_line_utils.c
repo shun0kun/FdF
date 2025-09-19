@@ -6,13 +6,13 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:41:02 by sshimots          #+#    #+#             */
-/*   Updated: 2025/05/23 09:33:50 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/19 17:38:18 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	gnl_strlen(char *s)
 {
 	size_t	len;
 

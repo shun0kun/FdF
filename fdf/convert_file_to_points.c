@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:48 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/14 15:28:18 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/19 17:47:27 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,6 @@ unsigned int	extract_color_unit(char *token)
 		return (0x00000000);
 }
 
-int	ft_atoi(char *s)
-{
-	int	i;
-	int	n;
-
-	i = 0;
-	n = 0;
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		n += s[i] - '0';
-		n *= 10;
-		i++;
-	}
-	return (n);
-}
-
 void	convert_token_to_point(t_grid *grid, int i, int j, char *token)
 {
 	grid->points[i][j].x = (IMAGE_WIDTH / 2 - GRID_WIDTH * grid->cols / 2)
@@ -111,4 +95,6 @@ int	convert_file_to_points(const char *filename, t_grid *grid)
 		i++;
 	}
 	close(fd);
+	return (1);
 }
+//一行減らす！
