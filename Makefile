@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilibft -Iget_next_line
 LDFLAGS = -Llibft -Lget_next_line
 LDLIBS = -lgnl -lft -lmlx -lX11 -lXext -lm
-NAME = fdf
+NAME = run_fdf
 SRCS = fdf/convert_file_to_points.c \
 		fdf/create_base_point.c \
 		fdf/draw_grid.c \
@@ -41,7 +41,7 @@ clean:
 	$(MAKE) -C libft clean
 	$(MAKE) -C get_next_line clean
 
-fclean:
+fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C libft fclean
 	$(MAKE) -C get_next_line fclean

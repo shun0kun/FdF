@@ -12,7 +12,7 @@ void	update_to_from_origin(t_mat4 to_origin, t_mat4 from_origin, t_point base_po
 							{0, 0, 0, 1}};
 
 	ft_memcpy(to_origin, mat1, sizeof(mat1));
-	fd_memcpy(from_origin, mat2, sizeof(mat2));
+	ft_memcpy(from_origin, mat2, sizeof(mat2));
 }
 
 t_render	init_render(t_grid *grid, t_mlx mlx)
@@ -47,6 +47,7 @@ int	control_keypress(int keycode, void *param)
 		clean_image(render->mlx);
 		draw_grid(render->mlx, render->grid);
 	}
+	return (1);//返すの1でいいの？
 }
 
 void	start_rendering(t_grid *grid)

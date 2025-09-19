@@ -86,6 +86,6 @@ void	init_transforms(t_transforms *transforms)
 	init_rotation_transforms_1(transforms);
 	init_rotation_transforms_2(transforms);
 	init_scale_transforms(transforms);
-	init_to_origin_transforms(transforms);
-	init_from_origin_transforms(transforms);
+	init_to_origin_transform(transforms);
+	init_from_origin_transform(transforms);
 }

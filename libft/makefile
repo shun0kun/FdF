@@ -2,7 +2,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRCS = ft_atoi.c \
 		ft_memcpy.c \
-		ft_split.c
+		ft_split.c \
+		ft_strlen.c
 OBJS = $(SRCS:.c=.o)
 NAME = libft.a
 

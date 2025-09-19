@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:52 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/12 23:13:49 by shimotsukas      ###   ########.fr       */
+/*   Updated: 2025/09/19 19:09:28 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	is_valid_token(char *token)
 		return (false);
 }
 
-int	validate_line(const char *line, int *expected_cols, int *is_first_line)
+int	validate_line(char *line, int *expected_cols, int *is_first_line)
 {
 	char	**tokens;
 	int		count;
@@ -114,7 +114,7 @@ int	validate_file(const char *filename, int *out_cols, int *out_rows)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		*out_rows++;
+		(*out_rows)++;
 		if (!validate_line(line, out_cols, &is_first_line))
 		{
 			free(line);

@@ -6,15 +6,15 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/19 17:46:00 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/19 19:13:01 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include <libft.h>
-# include <get_next_line.h>
+# include "../../libft/libft.h"
+# include "../../get_next_line/get_next_line.h"
 # include <mlx.h>
 # include <fcntl.h>
 # include <math.h>
@@ -108,9 +108,20 @@ void	start_rendering(t_grid *grid);
 void	init_model(t_mat4 model);
 void	init_transforms(t_transforms *transforms);
 void	init_to_origin_transform(t_transforms *transforms);
-void	init_from_origin_transforms(t_transforms *transforms);
-
-
+void	init_from_origin_transform(t_transforms *transforms);
+int		ft_abs(int n);
+int		ft_max(int m, int n);
+void	put_pixel_to_image(t_mlx mlx, t_point point);
+void	clean_image(t_mlx mlx);
+void	fill_matrix4x4_zero(t_mat4 mat);
+void	multiply_matrix4x4(const t_mat4 leftmat, const t_mat4 rightmat, t_mat4 res);
+bool	is_digit(char c);
+bool	is_hex_digit(char c);
+bool	is_hex_unsigned_int(char *token);
+bool	is_int(char *n, bool is_minus);
+bool	is_octal_number(char *token);
+void	update_model(t_mat4 model, t_transforms transforms, int keycode);
+void	update_points(t_grid grid, t_mat4 model);
+void	draw_grid(t_mlx mlx, t_grid grid);
 
 #endif
-

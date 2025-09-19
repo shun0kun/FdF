@@ -30,7 +30,6 @@ void	mat4_mul_vec4(t_mat4 model, float vec[4][1])
 void	update_point(t_point *point, t_mat4 model)
 {
 	float	vec[4][1];
-	float	new_vec[4][1];
 
 	vec[0][0] = point->x;
 	vec[1][0] = point->y;

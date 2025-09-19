@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include "fdf/internal/fdf.h"
 
 int	main(void)
 {
-	if (!fdf("in.txt"))
+	if (!fdf("10-2.fdf"))
 	{
 		printf("fail\n");
 		return (-1);

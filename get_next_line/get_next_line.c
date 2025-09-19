@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:40:52 by sshimots          #+#    #+#             */
-/*   Updated: 2025/05/23 09:34:51 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/19 19:10:25 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*extend(char *stash, char *s)
 	j = 0;
 	if (!stash)
 	{
-		new_stash = malloc(ft_strlen(s) + 1);
+		new_stash = malloc(gnl_strlen(s) + 1);
 		while (s[i])
 		{
 			new_stash[i] = s[i];
@@ -67,7 +67,7 @@ char	*extend(char *stash, char *s)
 		return (new_stash);
 		// return (s);
 	}
-	new_stash = malloc((ft_strlen(stash) + ft_strlen(s) + 1) * sizeof(char));
+	new_stash = malloc((gnl_strlen(stash) + gnl_strlen(s) + 1) * sizeof(char));
 	if (!new_stash)
 		return (free_and_return_null(&stash, &s));
 	while (stash[i])
@@ -102,7 +102,7 @@ char	*get_next_line(int fd)
 		if (!s)
 			return (free_and_return_null(&stash, &s));
 		buf = read(fd, s, BUFFER_SIZE);
-		if (((buf == 0 && (!stash || ft_strlen(stash) == 0)))|| buf == -1)
+		if (((buf == 0 && (!stash || gnl_strlen(stash) == 0)))|| buf == -1)
 			return (free_and_return_null(&stash, &s));
 		s[buf] = '\0';
 		stash = extend(stash, s);

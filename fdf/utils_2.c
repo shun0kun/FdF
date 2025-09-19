@@ -7,7 +7,7 @@ void	init_to_origin_matrix(t_mat4 to_origin_matrix, t_point base_point)
 	{0, 0, 1, -(float)base_point.x},
 	{0, 0, 0, 1}};
 
-	memcpy(to_origin_matrix, a, sizeof(a));
+	ft_memcpy(to_origin_matrix, a, sizeof(a));
 }
 
 void	init_off_origin_matrix(t_mat4 off_origin_matrix, t_point base_point)
@@ -17,10 +17,10 @@ void	init_off_origin_matrix(t_mat4 off_origin_matrix, t_point base_point)
 	{0, 0, 1, (float)base_point.x},
 	{0, 0, 0, 1}};
 
-	memcpy(off_origin_matrix, a, sizeof(a));
+	ft_memcpy(off_origin_matrix, a, sizeof(a));
 }
 
-void	multiply_matrix4x4(t_mat4 leftmat, t_mat4 rightmat, t_mat4 res)
+void	multiply_matrix4x4(const t_mat4 leftmat, const t_mat4 rightmat, t_mat4 res)
 {
 	t_mat4	rightmat_copy;
 	t_mat4	leftmat_copy;
@@ -28,8 +28,8 @@ void	multiply_matrix4x4(t_mat4 leftmat, t_mat4 rightmat, t_mat4 res)
 	int		j;
 	int		k;
 
-	memcpy(rightmat_copy, rightmat, sioeof(rightmat));
-	memcpy(leftmat_copy, leftmat, sizeof(leftmat));
+	ft_memcpy(rightmat_copy, rightmat, sizeof(t_mat4));
+	ft_memcpy(leftmat_copy, leftmat, sizeof(t_mat4));
 	fill_matrix4x4_zero(res);
 	i = 0;
 	while (i < 4)

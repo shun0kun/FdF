@@ -1,6 +1,6 @@
 #include "internal/fdf.h"
 
-ç
+int	ft_abs(int n)
 {
 	if (n < 0)
 		return (-n);
@@ -8,7 +8,7 @@
 		return (n);
 }
 
-ç
+int	ft_max(int m, int n)
 {
 	if (m > n)
 		return (m);
@@ -16,7 +16,7 @@
 		return (n);
 }
 
-ç
+void	put_pixel_to_image(t_mlx mlx, t_point point)
 {
 	if (point.x >= 0 && point.x < IMAGE_WIDTH && point.y >= 0
 		&& point.y < IMAGE_HEIGHT)
@@ -26,7 +26,7 @@
 	}
 }
 
-ç
+void	clean_image(t_mlx mlx)
 {
 	t_point	p;
 
@@ -43,7 +43,7 @@
 	}
 }
 
-ç
+void	fill_matrix4x4_zero(t_mat4 mat)
 {
 	int	i;
 	int	j;
