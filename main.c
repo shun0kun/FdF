@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include "fdf/internal/fdf.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	if (!fdf("10-2.fdf"))
+	(void)argc;
+
+	if (!fdf(argv[1]))
 	{
 		printf("fail\n");
 		return (-1);

@@ -11,26 +11,26 @@ void	update_model(t_mat4 model, t_transforms transforms, int keycode)
 {
 	if (keycode == KEY_ARROW_LEFT)
 		multiply_matrix4x4(transforms.translate_left, model, model);
-	if (keycode == KEY_ARROW_UP)
+	else if (keycode == KEY_ARROW_UP)
 		multiply_matrix4x4(transforms.translate_up, model, model);
-	if (keycode == KEY_ARROW_RIGHT)
+	else if (keycode == KEY_ARROW_RIGHT)
 		multiply_matrix4x4(transforms.translate_right, model, model);
-	if (keycode == KEY_ARROW_DOWN)
+	else if (keycode == KEY_ARROW_DOWN)
 		multiply_matrix4x4(transforms.translate_down, model, model);
-	if (keycode == KEY_D)
+	else if (keycode == KEY_D)
 		f(transforms, transforms.rotate_x_plus, model, model);
-	if (keycode == KEY_F)
+	else if (keycode == KEY_F)
 		f(transforms, transforms.rotate_x_minus, model, model);
-	if (keycode == KEY_A)
+	else if (keycode == KEY_A)
 		f(transforms, transforms.rotate_y_plus, model, model);
-	if (keycode == KEY_S)
+	else if (keycode == KEY_S)
 		f(transforms, transforms.rotate_y_minus, model, model);
-	if (keycode == KEY_W)
+	else if (keycode == KEY_W)
 		f(transforms, transforms.rotate_z_plus, model, model);
-	if (keycode == KEY_E)
+	else if (keycode == KEY_E)
 		f(transforms, transforms.rotate_z_minus, model, model);
-	if (keycode == KEY_EQUAL)
+	else if (keycode == KEY_EQUAL)
 		f(transforms, transforms.scale_up, model, model);
-	if (keycode == KEY_MINUS)
+	else if (keycode == KEY_MINUS)
 		f(transforms, transforms.scale_down, model, model);
 }

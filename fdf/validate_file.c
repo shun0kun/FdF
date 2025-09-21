@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:52 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/19 19:09:28 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/21 12:12:37 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	convert_newline_to_null(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] || line[i] != '\n')
+	while (line[i] && line[i] != '\n')
 		i++;
 	if (!line[i])
 		return ;

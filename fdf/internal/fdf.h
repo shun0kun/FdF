@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:29 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/19 19:13:01 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/21 17:55:50 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <unistd.h>
 # include "mlx_keycodes.h"
 # include "config.h"
+# include <stdio.h>//for debug
 
 typedef float	t_mat4[4][4];
 
@@ -83,9 +84,11 @@ typedef struct s_dda
 typedef struct s_grid
 {
 	t_point	**points;
+	t_point	**current_points;
 	int		cols;
 	int		rows;
 	t_point	base_point;
+	t_point	current_base_point;
 }	t_grid;
 
 typedef struct s_render
@@ -121,7 +124,9 @@ bool	is_hex_unsigned_int(char *token);
 bool	is_int(char *n, bool is_minus);
 bool	is_octal_number(char *token);
 void	update_model(t_mat4 model, t_transforms transforms, int keycode);
-void	update_points(t_grid grid, t_mat4 model);
+void	update_current_points(t_grid grid, t_mat4 model);
+void	update_current_base_point(t_grid *grid, t_mat4 model);
 void	draw_grid(t_mlx mlx, t_grid grid);
+void	mat4_mul_vec4(t_mat4 model, float vec[4][1]);
 
 #endif

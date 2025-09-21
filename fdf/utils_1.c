@@ -30,6 +30,7 @@ void	clean_image(t_mlx mlx)
 {
 	t_point	p;
 
+	p.color = 0x00000000;
 	p.y = 0;
 	while (p.y < IMAGE_HEIGHT)
 	{

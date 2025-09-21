@@ -73,9 +73,9 @@ void	draw_grid(t_mlx mlx, t_grid grid)
 		while (j < grid.cols)
 		{
 			if (j + 1 < grid.cols)
-				draw_line_dda(mlx, grid.points[i][j], grid.points[i][j + 1]);
+				draw_line_dda(mlx, grid.current_points[i][j], grid.current_points[i][j + 1]);
 			if (i + 1 < grid.rows)
-				draw_line_dda(mlx, grid.points[i][j], grid.points[i + 1][j]);
+				draw_line_dda(mlx, grid.current_points[i][j], grid.current_points[i + 1][j]);
 			j++;
 		}
 		i++;

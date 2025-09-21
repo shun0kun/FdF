@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:48 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/19 17:47:27 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/21 14:22:29 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,15 @@ unsigned int	extract_color_unit(char *token)
 		return (ft_atohexaui(s));
 	}
 	else
-		return (0x00000000);
+		return (0x00FFFFFF);
 }
 
 void	convert_token_to_point(t_grid *grid, int i, int j, char *token)
 {
-	grid->points[i][j].x = (IMAGE_WIDTH / 2 - GRID_WIDTH * grid->cols / 2)
-					+ GRID_WIDTH * j;
-	grid->points[i][j].y = (IMAGE_HEIGHT / 2 - GRID_HEIGHT * grid->rows / 2)
-					+ GRID_HEIGHT * i;
+	grid->points[i][j].x = (int)((IMAGE_WIDTH * 0.5f - GRID_WIDTH * (grid->cols - 1) * 0.5f)
+					+ GRID_WIDTH * j);
+	grid->points[i][j].y = (int)((IMAGE_HEIGHT * 0.5f - GRID_HEIGHT * (grid->rows - 1) * 0.5f)
+					+ GRID_HEIGHT * i);
 	grid->points[i][j].z = GRID_ELEVATION * ft_atoi(token);
 	grid->points[i][j].color = extract_color_unit(token);
 }

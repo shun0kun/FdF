@@ -25,6 +25,6 @@ void	create_base_point(t_grid *grid)
 	}
 	grid->base_point.x = IMAGE_WIDTH / 2;
 	grid->base_point.y = IMAGE_HEIGHT / 2;
-	grid->base_point.z = (int)((float)(z_max + z_min) / (float)2);
-	grid->base_point.color = 0x00000000;
+	grid->base_point.z = (int)((z_max + z_min) * 0.5f);
+	grid->base_point.color = 0x00FF0000;
 }

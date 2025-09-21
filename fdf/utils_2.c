@@ -4,7 +4,7 @@ void	init_to_origin_matrix(t_mat4 to_origin_matrix, t_point base_point)
 {
 	const t_mat4	a = {{1, 0, 0, -(float)base_point.x},
 	{0, 1, 0, -(float)base_point.y},
-	{0, 0, 1, -(float)base_point.x},
+	{0, 0, 1, -(float)base_point.z},
 	{0, 0, 0, 1}};
 
 	ft_memcpy(to_origin_matrix, a, sizeof(a));
@@ -14,7 +14,7 @@ void	init_off_origin_matrix(t_mat4 off_origin_matrix, t_point base_point)
 {
 	const t_mat4	a = {{1, 0, 0, (float)base_point.x},
 	{0, 1, 0, (float)base_point.y},
-	{0, 0, 1, (float)base_point.x},
+	{0, 0, 1, (float)base_point.z},
 	{0, 0, 0, 1}};
 
 	ft_memcpy(off_origin_matrix, a, sizeof(a));
@@ -40,7 +40,7 @@ void	multiply_matrix4x4(const t_mat4 leftmat, const t_mat4 rightmat, t_mat4 res)
 			k = 0;
 			while (k < 4)
 			{
-				res[i][j] = leftmat_copy[i][k] * rightmat_copy[k][j];
+				res[i][j] += leftmat_copy[i][k] * rightmat_copy[k][j];
 				k++;
 			}
 			j++;
