@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_grid.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/25 11:51:23 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 11:57:47 by sshimots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "internal/fdf.h"
 
 void	initiate_dda_param(t_dda *dda, t_point p1, t_point p2)
@@ -30,7 +42,10 @@ t_point	construct_pixel(t_dda dda)
 
 	p.x = (int)lroundf(dda.x);
 	p.y = (int)lroundf(dda.y);
-	p.color = ((unsigned int)lroundf(dda.a) << 24) | ((unsigned int)lroundf(dda.r) << 16) | ((unsigned int)lroundf(dda.g) << 8) | (unsigned int)lroundf(dda.b);
+	p.color = ((unsigned int)lroundf(dda.a) << 24)
+		| ((unsigned int)lroundf(dda.r) << 16)
+		| ((unsigned int)lroundf(dda.g) << 8)
+		| (unsigned int)lroundf(dda.b);
 	return (p);
 }
 
@@ -73,9 +88,9 @@ void	draw_grid(t_mlx mlx, t_grid grid)
 		while (j < grid.cols)
 		{
 			if (j + 1 < grid.cols)
-				draw_line_dda(mlx, grid.current_points[i][j], grid.current_points[i][j + 1]);
+				draw_line_dda(mlx, grid.pts_cur[i][j], grid.pts_cur[i][j + 1]);
 			if (i + 1 < grid.rows)
-				draw_line_dda(mlx, grid.current_points[i][j], grid.current_points[i + 1][j]);
+				draw_line_dda(mlx, grid.pts_cur[i][j], grid.pts_cur[i + 1][j]);
 			j++;
 		}
 		i++;

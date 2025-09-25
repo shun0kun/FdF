@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_keycodes.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/25 13:01:31 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 13:01:32 by sshimots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MLX_KEYCODES_H
 # define MLX_KEYCODES_H
 
@@ -49,8 +61,6 @@
 #  define KEY_ESC			65307
 #  define KEY_SHIFT_L		65505
 #  define KEY_SHIFT_R		65506
-# elif _defined(__APPLE__) && defined(__MACH__)
-#  define KEY_ 1
 # endif
 
 #endif

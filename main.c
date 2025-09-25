@@ -1,15 +1,22 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/25 15:08:13 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 15:10:18 by sshimots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf/internal/fdf.h"
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-
-	if (!fdf(argv[1]))
-	{
-		printf("fail\n");
+	if (argc != 2)
 		return (-1);
-	}
-	printf("success\n");
+	if (!fdf(argv[1]))
+		return (-1);
 	return (0);
 }

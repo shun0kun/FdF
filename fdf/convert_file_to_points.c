@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:48 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/21 14:22:29 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/25 13:15:04 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,14 @@ unsigned int	extract_color_unit(char *token)
 
 void	convert_token_to_point(t_grid *grid, int i, int j, char *token)
 {
-	grid->points[i][j].x = (int)((IMAGE_WIDTH * 0.5f - GRID_WIDTH * (grid->cols - 1) * 0.5f)
-					+ GRID_WIDTH * j);
-	grid->points[i][j].y = (int)((IMAGE_HEIGHT * 0.5f - GRID_HEIGHT * (grid->rows - 1) * 0.5f)
-					+ GRID_HEIGHT * i);
-	grid->points[i][j].z = GRID_ELEVATION * ft_atoi(token);
-	grid->points[i][j].color = extract_color_unit(token);
+	grid->pts[i][j].x = (int)((IMAGE_WIDTH * 0.5f
+				- GRID_WIDTH * (grid->cols - 1) * 0.5f)
+			+ GRID_WIDTH * j);
+	grid->pts[i][j].y = (int)((IMAGE_HEIGHT * 0.5f
+				- GRID_HEIGHT * (grid->rows - 1) * 0.5f)
+			+ GRID_HEIGHT * i);
+	grid->pts[i][j].z = GRID_ELEVATION * ft_atoi(token);
+	grid->pts[i][j].color = extract_color_unit(token);
 }
 
 int	convert_file_to_points(const char *filename, t_grid *grid)
@@ -80,7 +82,7 @@ int	convert_file_to_points(const char *filename, t_grid *grid)
 	if (fd < 0)
 		return (0);
 	i = 0;
-	while (1)
+	while (++i)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -89,12 +91,10 @@ int	convert_file_to_points(const char *filename, t_grid *grid)
 		tokens = ft_split(line, ' ');
 		j = -1;
 		while (++j < grid->cols)
-			convert_token_to_point(grid, i, j, tokens[j]);
+			convert_token_to_point(grid, i - 1, j, tokens[j]);
 		free_tokens(tokens);
 		free(line);
-		i++;
 	}
 	close(fd);
 	return (1);
 }
-//一行減らす！

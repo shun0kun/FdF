@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/25 12:57:40 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 13:01:09 by sshimots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "internal/fdf.h"
 
 bool	is_hex_unsigned_int(char *token)
@@ -26,21 +38,23 @@ bool	is_int(char *n, bool is_minus)
 
 	int_max = "2147483647";
 	int_min_abs = "2147483648";
-	i = 0;
+	i = -1;
 	if (is_minus)
-		while (i < 10)
+	{
+		while (++i < 10)
 		{
 			if (n[i] > int_min_abs[i])
 				return (false);
-			i++;
 		}
+	}
 	else
-		while (i < 10)
+	{
+		while (++i < 10)
 		{
 			if (n[i] > int_max[i])
 				return (false);
-			i++;
-		}		
+		}
+	}
 	return (true);
 }
 

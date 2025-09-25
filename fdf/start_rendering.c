@@ -1,29 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_rendering.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/25 12:21:14 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 14:54:07 by sshimots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "internal/fdf.h"
 
-void	update_to_from_origin(t_mat4 to_origin, t_mat4 from_origin, t_point base_point)
+void	switch_projection_type(t_render *render)
 {
-	const t_mat4	mat1 = {{1, 0, 0, -(float)base_point.x},
-							{0, 1, 0, -(float)base_point.y},
-							{0, 0, 1, -(float)base_point.z},
-							{0, 0, 0, 1}};
-	const t_mat4	mat2 = {{1, 0, 0, (float)base_point.x},
-							{0, 1, 0, (float)base_point.y},
-							{0, 0, 1, (float)base_point.z},
-							{0, 0, 0, 1}};
-
-	ft_memcpy(to_origin, mat1, sizeof(t_mat4));
-	ft_memcpy(from_origin, mat2, sizeof(t_mat4));
+	if (render->proj_type == ISOMETRIC_PROJECTION)
+	{
+		render->proj_type = ORTHOGRAPHIC_PROJECTION;
+		init_model(render->model, render->proj_type);
+	}
+	else
+	{
+		render->proj_type = ISOMETRIC_PROJECTION;
+		init_model(render->model, render->proj_type);
+	}
 }
 
-t_render	init_render(t_grid *grid, t_mlx mlx)
+void	render_grid(t_render *render)
 {
-	t_render	render;
-
-	render.grid = *grid;
-	render.mlx = mlx;
-	init_model(render.model);
-	init_transforms(&render.transforms);
-	return (render);
+	update_current_points(render->grid, render->model);
+	update_current_base_point(&render->grid, render->model);
+	clean_image(render->mlx);
+	draw_grid(render->mlx, render->grid);
+	put_pixel_to_image(render->mlx, render->grid.pt_base_cur);
+	mlx_put_image_to_window(render->mlx.mlx, render->mlx.win,
+		render->mlx.img, 0, 0);
 }
 
 int	control_keypress(int keycode, void *param)
@@ -33,44 +44,22 @@ int	control_keypress(int keycode, void *param)
 	render = (t_render *)param;
 	if (keycode == KEY_ESC)
 	{
-		destroy_points(render->grid.points, render->grid.rows);
-		destroy_points(render->grid.current_points, render->grid.rows);
-		mlx_destroy_image(render->mlx.mlx, render->mlx.img);
-		mlx_destroy_window(render->mlx.mlx, render->mlx.win);
-		mlx_destroy_display(render->mlx.mlx);
+		clean_up(render);
 		exit(0);
-	}	
+	}
+	else if (keycode == KEY_SPACE)
+	{
+		switch_projection_type(render);
+		render_grid(render);
+	}
 	else
 	{
-		update_to_from_origin(render->transforms.to_origin, render->transforms.from_origin, render->grid.current_base_point);
-		update_model(render->model, render->transforms, keycode);
-		update_current_points(render->grid, render->model);
-		update_current_base_point(&render->grid, render->model);
-		clean_image(render->mlx);
-		draw_grid(render->mlx, render->grid);
-		put_pixel_to_image(render->mlx, render->grid.current_base_point);
-		mlx_put_image_to_window(render->mlx.mlx, render->mlx.win, render->mlx.img, 0, 0);
+		update_to_from_origin(render->trs.to_origin, render->trs.from_origin,
+			render->grid.pt_base_cur);
+		update_model(render->model, render->trs, keycode);
+		render_grid(render);
 	}
-	return (1);//返すの1でいいの？
-}
-
-void	print_model(t_render render)
-{
-	int			i;
-	int			j;
-
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			printf("%f, ", render.model[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
+	return (0);
 }
 
 void	start_rendering(t_grid *grid)
@@ -83,13 +72,8 @@ void	start_rendering(t_grid *grid)
 	mlx.img = mlx_new_image(mlx.mlx, IMAGE_WIDTH, IMAGE_HEIGHT);
 	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.ll, &mlx.endian);
 	render = init_render(grid, mlx);
-	render.grid.current_points = create_points(render.grid.cols, render.grid.rows);
+	render.grid.pts_cur = create_points(render.grid.cols, render.grid.rows);
 	mlx_hook(mlx.win, 2, 1L << 0, control_keypress, &render);
-	print_model(render);
-	update_current_points(render.grid, render.model);
-	update_current_base_point(&render.grid, render.model);
-	draw_grid(render.mlx, render.grid);	
-	put_pixel_to_image(render.mlx, render.grid.current_base_point);
-	mlx_put_image_to_window(render.mlx.mlx, render.mlx.win, render.mlx.img, 0, 0);
+	render_grid(&render);
 	mlx_loop(mlx.mlx);
 }

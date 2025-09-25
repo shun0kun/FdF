@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/25 12:55:47 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 12:56:49 by sshimots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "internal/fdf.h"
 
 void	init_to_origin_matrix(t_mat4 to_origin_matrix, t_point base_point)
@@ -20,7 +32,8 @@ void	init_off_origin_matrix(t_mat4 off_origin_matrix, t_point base_point)
 	ft_memcpy(off_origin_matrix, a, sizeof(a));
 }
 
-void	multiply_matrix4x4(const t_mat4 leftmat, const t_mat4 rightmat, t_mat4 res)
+void	multiply_matrix4x4(const t_mat4 leftmat, const t_mat4 rightmat,
+	t_mat4 res)
 {
 	t_mat4	rightmat_copy;
 	t_mat4	leftmat_copy;
@@ -56,5 +69,6 @@ bool	is_digit(char c)
 
 bool	is_hex_digit(char c)
 {
-	return ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'));
+	return ((c >= '0' && c <= '9')
+		|| (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'));
 }

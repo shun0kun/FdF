@@ -18,7 +18,8 @@ SRCS = fdf/convert_file_to_points.c \
 		fdf/utils_2.c \
 		fdf/utils_3.c \
 		fdf/validate_file.c \
-		fdf/update_current_points.c
+		fdf/update_current_points.c \
+		fdf/utils_rendering.c
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
 LIBGNL = get_next_line/libgnl.a

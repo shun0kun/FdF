@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   config.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/25 13:01:21 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 15:12:12 by sshimots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONFIG_H
 # define CONFIG_H
 
@@ -20,7 +32,11 @@
 #  define M_PI				3.14159265358979323846264338327950288
 # endif
 # define TRANSLATE_PIXEL	5.0f
-# define ROTATE_RAD			(3 * M_PI / 180.0)
+# define ROTATE_RAD			0.05f
 # define SCALE_DELTA		0.1f
+
+# define ISOMETRIC_PROJECTION		0
+# define ORTHOGRAPHIC_PROJECTION	1
+# define DEFAULT_PROJECTION			ISOMETRIC_PROJECTION
 
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 09:41:10 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/19 17:39:18 by sshimots         ###   ########.fr       */
+/*   Created: 2025/05/23 11:05:42 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 13:36:45 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10
 # endif
 
 # include <stdbool.h>
-# include <stdlib.h>
 # include <unistd.h>
+# include <stdlib.h>
 
-// int		main(void);
 char	*get_next_line(int fd);
-char	*extend(char *stash, char *s);
-char	*get_line_and_trim(char *stash);
-char	*free_and_return_null(char **p1, char **p2);
-bool	has_line_break(char *s);
-void	free_and_nullify(char **p);
+char	*if_has_nl_get_line(char **p_stash);
+char	*get_last_line(char **p_stash);
+char	*buf_join(char **p_stash, char **p_buf);
+char	*free1_and_return_null(char **p);
+char	*free2_and_return_null(char **p1, char **p2);
+bool	has_nl(char *s);
 size_t	gnl_strlen(char *s);
 
 #endif

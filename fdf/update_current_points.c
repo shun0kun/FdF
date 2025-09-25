@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_current_points.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/25 12:43:46 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 12:43:46 by sshimots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "internal/fdf.h"
 
 void	mat4_mul_vec4(t_mat4 model, float vec[4][1])
@@ -55,7 +67,7 @@ void	update_current_points(t_grid grid, t_mat4 model)
 		j = 0;
 		while (j < grid.cols)
 		{
-			grid.current_points[i][j] = update_current_point(grid.points[i][j], model);
+			grid.pts_cur[i][j] = update_current_point(grid.pts[i][j], model);
 			j++;
 		}
 		i++;
@@ -64,5 +76,5 @@ void	update_current_points(t_grid grid, t_mat4 model)
 
 void	update_current_base_point(t_grid *grid, t_mat4 model)
 {
-	grid->current_base_point = update_current_point(grid->base_point, model);
+	grid->pt_base_cur = update_current_point(grid->pt_base, model);
 }

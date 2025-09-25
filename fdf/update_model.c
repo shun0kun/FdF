@@ -1,36 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_model.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/25 12:53:56 by sshimots          #+#    #+#             */
+/*   Updated: 2025/09/25 12:53:56 by sshimots         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "internal/fdf.h"
 
-void	f(t_transforms transforms, t_mat4 transform, t_mat4 model, t_mat4 res)
+void	f(t_trs trs, t_mat4 mat, t_mat4 model, t_mat4 res)
 {
-	multiply_matrix4x4(transforms.to_origin, model, model);
-	multiply_matrix4x4(transform, model, model);
-	multiply_matrix4x4(transforms.from_origin, model, res);//3つ目の引数はmodelでも結果は同じ。
+	multiply_matrix4x4(trs.to_origin, model, model);
+	multiply_matrix4x4(mat, model, model);
+	multiply_matrix4x4(trs.from_origin, model, res);
 }
 
-void	update_model(t_mat4 model, t_transforms transforms, int keycode)
+void	update_model(t_mat4 model, t_trs trs, int keycode)
 {
 	if (keycode == KEY_ARROW_LEFT)
-		multiply_matrix4x4(transforms.translate_left, model, model);
+		multiply_matrix4x4(trs.translate_left, model, model);
 	else if (keycode == KEY_ARROW_UP)
-		multiply_matrix4x4(transforms.translate_up, model, model);
+		multiply_matrix4x4(trs.translate_up, model, model);
 	else if (keycode == KEY_ARROW_RIGHT)
-		multiply_matrix4x4(transforms.translate_right, model, model);
+		multiply_matrix4x4(trs.translate_right, model, model);
 	else if (keycode == KEY_ARROW_DOWN)
-		multiply_matrix4x4(transforms.translate_down, model, model);
+		multiply_matrix4x4(trs.translate_down, model, model);
 	else if (keycode == KEY_D)
-		f(transforms, transforms.rotate_x_plus, model, model);
+		f(trs, trs.rotate_x_plus, model, model);
 	else if (keycode == KEY_F)
-		f(transforms, transforms.rotate_x_minus, model, model);
+		f(trs, trs.rotate_x_minus, model, model);
 	else if (keycode == KEY_A)
-		f(transforms, transforms.rotate_y_plus, model, model);
+		f(trs, trs.rotate_y_plus, model, model);
 	else if (keycode == KEY_S)
-		f(transforms, transforms.rotate_y_minus, model, model);
+		f(trs, trs.rotate_y_minus, model, model);
 	else if (keycode == KEY_W)
-		f(transforms, transforms.rotate_z_plus, model, model);
+		f(trs, trs.rotate_z_plus, model, model);
 	else if (keycode == KEY_E)
-		f(transforms, transforms.rotate_z_minus, model, model);
+		f(trs, trs.rotate_z_minus, model, model);
 	else if (keycode == KEY_EQUAL)
-		f(transforms, transforms.scale_up, model, model);
+		f(trs, trs.scale_up, model, model);
 	else if (keycode == KEY_MINUS)
-		f(transforms, transforms.scale_down, model, model);
+		f(trs, trs.scale_down, model, model);
 }
+
+//3つ目の引数はmodelでも結果は同じ。f
