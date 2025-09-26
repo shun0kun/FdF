@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 void	create_base_point(t_grid *grid)
 {

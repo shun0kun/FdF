@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 void	switch_projection_type(t_render *render)
 {

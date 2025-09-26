@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 void	init_to_origin_transform(t_trs *trs)
 {

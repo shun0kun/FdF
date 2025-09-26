@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 void	init_to_origin_matrix(t_mat4 to_origin_matrix, t_point base_point)
 {

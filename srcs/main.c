@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf/internal/fdf.h"
+#include "../headers/fdf.h"
 
 int	main(int argc, char **argv)
 {

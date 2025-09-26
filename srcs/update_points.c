@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 void	update_point(t_point *pt, t_mat4 model)
 {

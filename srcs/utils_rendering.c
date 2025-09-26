@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 void	update_to_from_origin(t_mat4 to_origin, t_mat4 from_origin,
 	t_point pt_base_cur)
