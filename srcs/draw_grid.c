@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_grid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 11:51:23 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/25 11:57:47 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/26 14:55:16 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 void	initiate_dda_param(t_dda *dda, t_point p1, t_point p2)
 {
@@ -96,6 +96,3 @@ void	draw_grid(t_mlx mlx, t_grid grid)
 		i++;
 	}
 }
-
-//ctxの内、height, width, pointsを使う
-//ddaはローカルにしよう。

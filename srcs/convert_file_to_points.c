@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   convert_file_to_points.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:48 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/25 13:15:04 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/26 14:54:11 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 unsigned int	ft_atohexaui(char *s)
 {

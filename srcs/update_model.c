@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   update_model.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 12:53:56 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/25 12:53:56 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/26 14:53:27 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 void	f(t_trs trs, t_mat4 mat, t_mat4 model, t_mat4 res)
 {
@@ -46,5 +46,3 @@ void	update_model(t_mat4 model, t_trs trs, int keycode)
 	else if (keycode == KEY_MINUS)
 		f(trs, trs.scale_down, model, model);
 }
-
-//3つ目の引数はmodelでも結果は同じ。f

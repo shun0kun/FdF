@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: shimotsukasashunsuke <shimotsukasashuns    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 19:53:52 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/21 12:12:37 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/26 14:52:52 by shimotsukas      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "internal/fdf.h"
+#include "../headers/fdf.h"
 
 void	free_tokens(char **tokens)
 {
@@ -126,16 +126,3 @@ int	validate_file(const char *filename, int *out_cols, int *out_rows)
 	close(fd);
 	return (1);
 }
-//filenameではなく、fdを渡す設計にする。そうすることで、parse_width_and_height
-
-//get_next_lineの戻り値の型をt_errorにして、malloc失敗のNULLとファイル読み取り終了のNULLを区別する！
-//→このままだとget_next_lineがmalloc失敗した時にvalidate_fileはERR_OKを返してしまい、次の関数でバグる。
-//構造を変えてしまうのではなく、細かく関数に分けて行数を減らす。mallocを子関数で行うことで、freeも子関数で
-//→行えるので行数が節約できる。
-//gnlだと、lineの最後に\nが含まれてしまうので、これをnullに変えてから色々処理するのがいい。
-//ファイルの空行、line最後の改行(実質同じだが)をどうするのかを考えておく。
-//validate_tokenのオーバーフロー処理、マイナスintへの対応
-//splitもしかしたらタブでも区切らなきゃいけないかもしれない
-//n1_is_bigger_than_n2関数考えてみる。今回は使わないと思うけど。
-
-//空ファイル、空白onlyファイルを通す気がする。
