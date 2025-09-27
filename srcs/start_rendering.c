@@ -6,7 +6,7 @@
 /*   By: sshimots <sshimots@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/25 12:21:14 by sshimots          #+#    #+#             */
-/*   Updated: 2025/09/25 14:54:07 by sshimots         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:42:31 by sshimots         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ int	control_keypress(int keycode, void *param)
 	return (0);
 }
 
+int	destroy_notify(void *param)
+{
+	t_render	*render;
+
+	render = (t_render *)param;
+	clean_up(render);
+	exit(0);
+}
+
 void	start_rendering(t_grid *grid)
 {
 	t_mlx		mlx;
@@ -74,6 +83,7 @@ void	start_rendering(t_grid *grid)
 	render = init_render(grid, mlx);
 	render.grid.pts_cur = create_points(render.grid.cols, render.grid.rows);
 	mlx_hook(mlx.win, 2, 1L << 0, control_keypress, &render);
+	mlx_hook(mlx.win, 17, 0, destroy_notify, &render);
 	render_grid(&render);
 	mlx_loop(mlx.mlx);
 }

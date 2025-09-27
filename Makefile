@@ -30,7 +30,7 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(LIBGNL)
 	$(CC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
-fdf/%.o: fdf/%.c
+srcs/%.o: srcs/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
